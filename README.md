@@ -1,9 +1,9 @@
-<h3 align="center">AB Quartz Admin</h3>
+<h1 align="center">AB Quartz Admin Web API</h3>
 
 ---
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-QuartzAdmin WebApi is a AspNetCore WebApi 
+AspNEt Core WebApi for the Quartz.Net Scheduler.
 
 The api can easily be plugged into a existing application.
 
