@@ -1,6 +1,4 @@
-<p align="center">
-    <h4>AB Quartz Admin</h4>
-</p>
+<h3 align="center">AB Quartz Admin</h3>
 
 ---
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
