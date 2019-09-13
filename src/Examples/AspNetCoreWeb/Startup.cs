@@ -58,7 +58,6 @@ namespace AspNetCoreWeb
                     Title = "Quartz.Net Admin API",
                     Version = "v1",
                     Description = "Api for the Quartz.Net Scheduler",
-                    TermsOfService = new Uri("https://example.com/terms").ToString(),
                     Contact = new Contact
                     {
                         Name = "Geirr Winnem",
@@ -67,8 +66,8 @@ namespace AspNetCoreWeb
                     },
                     License = new License
                     {
-                        Name = "Use under LICX",
-                        Url = new Uri("https://example.com/license").ToString(),
+                        Name = "Use under MIT",
+                        Url = new Uri( "https://github.com/gwinnem/AB.QuartzAdmin.WebApi/blob/master/LICENSE" ).ToString(),
                     }
                 });
                 // Set the comments path for the Swagger JSON and UI.
