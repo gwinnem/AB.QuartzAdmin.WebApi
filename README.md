@@ -1,2 +1,34 @@
-# AB.QuartzAdmin.WebApi
-AspNetCore Web Api for Quartz.Net
+<p align="center">
+    <h4>AB Quartz Admin</h4>
+</p>
+
+---
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+QuartzAdmin WebApi is a AspNetCore WebApi 
+
+The api can easily be plugged into a existing application.
+
+> [Quartz.NET](https://www.quartz-scheduler.net) is a full-featured, open source job scheduling system that can be used from smallest apps to large scale enterprise systems.
+
+
+
+## Endpoints
+- Scheduler
+- Jobs
+- Triggers
+- Calendars
+
+## Install
+
+## Minimum requirements
+- .NET Standard 2.2
+
+## Usage
+
+## Notes
+
+
+
+## License
+This project is made available under the MIT license. See [LICENSE](LICENSE) for details.
