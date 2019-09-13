@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Quartz" Version="3.0.7" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="3.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Calendars\" />
+    <Folder Include="Models\Triggers\" />
+  </ItemGroup>
+
+</Project>
