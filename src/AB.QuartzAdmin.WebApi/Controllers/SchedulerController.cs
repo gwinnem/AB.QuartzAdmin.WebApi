@@ -44,7 +44,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
                 var metaData = await Scheduler.GetMetaData().ConfigureAwait(false);
                 return Ok(new SchedulerDetails(Scheduler, metaData));
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -65,7 +65,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
         {
             try
             {
-                if (delayMilliseconds == null)
+                if(delayMilliseconds == null)
                 {
                     await Scheduler.Start().ConfigureAwait(false);
                 }
@@ -76,7 +76,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
 
                 return NoContent();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -91,7 +91,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
         /// <response code="500">Returns the internal server error..</response>
         [ProducesResponseType(204)]
         [ProducesResponseType(500)]
-        [HttpPost]
+        [HttpGet]
         [Route("pause")]
         public async Task<IActionResult> PauseScheduler()
         {
@@ -100,7 +100,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
                 await Scheduler.Standby().ConfigureAwait(false);
                 return NoContent();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -124,7 +124,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
                 await Scheduler.Clear().ConfigureAwait(false);
                 return NoContent();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -140,7 +140,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
         /// <response code="500">Returns the internal server error..</response>
         [ProducesResponseType(204)]
         [ProducesResponseType(500)]
-        [HttpPost]
+        [HttpGet]
         [Route("shutdown")]
         public async Task<IActionResult> ShutDownScheduler(bool waitForJobsToComplete = false)
         {
@@ -149,7 +149,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
                 await Scheduler.Shutdown(waitForJobsToComplete).ConfigureAwait(false);
                 return NoContent();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -178,7 +178,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
 
                 return Ok(model);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -202,7 +202,7 @@ namespace AB.QuartzAdmin.WebApi.Controllers
                 await Scheduler.PauseJobs(GroupMatcher<JobKey>.GroupEquals(groupName));
                 return NoContent();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -226,9 +226,105 @@ namespace AB.QuartzAdmin.WebApi.Controllers
                 await Scheduler.ResumeJobs(GroupMatcher<JobKey>.GroupEquals(groupName));
                 return NoContent();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Pausing all triggers in group.
+        /// </summary>
+        /// <param name="groupName">Trigger Group Name.</param>
+        /// <returns>Status of operation.</returns>
+        /// <response code="204">Ok.</response>
+        /// <response code="500">Returns the internal server error..</response>
+        [ProducesResponseType(204)]
+        [ProducesResponseType(500)]
+        [HttpPost, Route("triggers/{groupName}/pause-all")]
+        public async Task<IActionResult> PauseAllTriggersInGroup(string groupName)
+        {
+            try
+            {
+                await Scheduler.PauseTriggers(GroupMatcher<TriggerKey>.GroupEquals(groupName));
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                Logger.LogError(ex, "PauseAllTriggersInGroup");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Resuming all triggers in group.
+        /// </summary>
+        /// <param name="groupName">Trigger Group Name.</param>
+        /// <returns>Status of operation.</returns>
+        /// <response code="204">Ok.</response>
+        /// <response code="500">Returns the internal server error..</response>
+        [ProducesResponseType(204)]
+        [ProducesResponseType(500)]
+        [HttpPost, Route("triggers/{groupName}/resume-all")]
+        public async Task<IActionResult> ResumeAllTriggersInGroup(string groupName)
+        {
+            try
+            {
+                await Scheduler.ResumeTriggers(GroupMatcher<TriggerKey>.GroupEquals(groupName));
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                Logger.LogError(ex, "ResumeAllTriggersInGroup");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Pausing all triggers in scheduler.
+        /// </summary>
+        /// <returns>Status of the operation.</returns>
+        /// <response code="204">Ok.</response>
+        /// <response code="500">Returns the internal server error..</response>
+        [ProducesResponseType(204)]
+        [ProducesResponseType(500)]
+        [HttpGet, Route("pause-all")]
+        public async Task<IActionResult> PauseAll()
+        {
+            try
+            {
+                await Scheduler.PauseAll();
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                Logger.LogError(ex, "PauseAll");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Resuming all triggers in scheduler.
+        /// </summary>
+        /// <returns>Status of the operation.</returns>
+        /// <response code="204">Ok.</response>
+        /// <response code="500">Returns the internal server error..</response>
+        [ProducesResponseType(204)]
+        [ProducesResponseType(500)]
+        [HttpGet, Route("resume-all")]
+        public async Task<IActionResult> ResumeAll()
+        {
+            try
+            {
+                await Scheduler.ResumeAll();
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                Logger.LogError(ex, "ResumeAll");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
