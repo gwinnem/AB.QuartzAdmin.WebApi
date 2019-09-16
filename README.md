@@ -23,6 +23,8 @@ The api can easily be plugged into a existing application.
 - .NET Standard 2.2
 
 ## Usage
+```aspx-csharp
+...
 // Setting up a DemoScheduler
 var properties = new NameValueCollection
 {
@@ -41,6 +43,9 @@ DemoScheduler.Create(scheduler, true).GetAwaiter().GetResult();
 
 // Adding the Api
 services.AddQuartzAdmin(scheduler);
+...
+```
+
 
 ## Notes
 The example project has swagger installed so just add /swagger to the url and the swagger document will be loaded.
