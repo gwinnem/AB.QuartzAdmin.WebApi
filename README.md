@@ -14,8 +14,8 @@ The api can easily be plugged into a existing application.
 ## Endpoints
 - Scheduler
 - Jobs
-- Triggers
-- Calendars
+- Triggers - Coming
+- Calendars - Coming
 
 ## Install
 
@@ -23,9 +23,27 @@ The api can easily be plugged into a existing application.
 - .NET Standard 2.2
 
 ## Usage
+// Setting up a DemoScheduler
+var properties = new NameValueCollection
+{
+    {"quartz.serializer.type", "json"},
+    {"quartz.scheduler.instanceName", "TestScheduler"},
+    {"quartz.scheduler.instanceId", "ABQuartzAdmin"},
+    {"quartz.threadPool.type", "Quartz.Simpl.SimpleThreadPool, Quartz"},
+    {"quartz.threadPool.threadCount", "10"}
+};
+
+ISchedulerFactory sf = new StdSchedulerFactory(properties);
+var scheduler = sf.GetScheduler().GetAwaiter().GetResult();
+services.AddSingleton(scheduler);
+scheduler.Clear();
+DemoScheduler.Create(scheduler, true).GetAwaiter().GetResult();
+
+// Adding the Api
+services.AddQuartzAdmin(scheduler);
 
 ## Notes
-
+The example project has swagger installed so just add /swagger to the url and the swagger document will be loaded.
 
 
 ## License
