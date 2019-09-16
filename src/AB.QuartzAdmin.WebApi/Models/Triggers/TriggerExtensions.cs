@@ -6,6 +6,9 @@ using System.Globalization;
 
 namespace AB.QuartzAdmin.WebApi.Models.Triggers
 {
+    /// <summary>
+    /// Extension methods Trigger details.
+    /// </summary>
     public static class TriggerExtensions
     {
         /// <summary>
@@ -30,20 +33,33 @@ namespace AB.QuartzAdmin.WebApi.Models.Triggers
             }
         }
 
+        /// <summary>
+        /// Extension method for getting scheduling description for a <see cref="ITrigger"/>
+        /// </summary>
+        /// <param name="trigger">The <see cref="ITrigger"/></param>
+        /// <returns>String containing the scheduling description for the <see cref="ITrigger"/></returns>
         public static string GetScheduleDescription(this ITrigger trigger)
         {
-            if(trigger is ICronTrigger cr)
-                return ExpressionDescriptor.GetDescription(cr.CronExpressionString);
-            if(trigger is IDailyTimeIntervalTrigger dt)
-                return GetScheduleDescription(dt);
-            if(trigger is ISimpleTrigger st)
-                return GetScheduleDescription(st);
-            if(trigger is ICalendarIntervalTrigger ct)
-                return GetScheduleDescription(ct.RepeatInterval, ct.RepeatIntervalUnit);
-
-            return null;
+            switch(trigger)
+            {
+                case ICronTrigger cr:
+                    return ExpressionDescriptor.GetDescription(cr.CronExpressionString);
+                case IDailyTimeIntervalTrigger dt:
+                    return GetScheduleDescription(dt);
+                case ISimpleTrigger st:
+                    return GetScheduleDescription(st);
+                case ICalendarIntervalTrigger ct:
+                    return GetScheduleDescription(ct.RepeatInterval, ct.RepeatIntervalUnit);
+                default:
+                    return null;
+            }
         }
 
+        /// <summary>
+        /// Extension method for getting scheduling description for a <see cref="ITrigger"/>
+        /// </summary>
+        /// <param name="trigger">The <see cref="IDailyTimeIntervalTrigger"/></param>
+        /// <returns>String containing the scheduling description for the <see cref="ITrigger"/></returns>
         public static string GetScheduleDescription(this IDailyTimeIntervalTrigger trigger)
         {
             var result = GetScheduleDescription(trigger.RepeatInterval, trigger.RepeatIntervalUnit, trigger.RepeatCount);
@@ -64,6 +80,11 @@ namespace AB.QuartzAdmin.WebApi.Models.Triggers
             return result;
         }
 
+        /// <summary>
+        /// Extension method for getting scheduling description for a <see cref="ITrigger"/>
+        /// </summary>
+        /// <param name="trigger">The <see cref="ITrigger"/></param>
+        /// <returns>String containing the scheduling description for the <see cref="ITrigger"/></returns>
         public static string GetScheduleDescription(this ISimpleTrigger trigger)
         {
             var result = "Repeat ";
@@ -90,6 +111,13 @@ namespace AB.QuartzAdmin.WebApi.Models.Triggers
             return result;
         }
 
+        /// <summary>
+        /// Helper method for getting scheduling description for a <see cref="ITrigger"/>
+        /// </summary>
+        /// <param name="repeatInterval">Time to wait between each time a trigger fires.</param>
+        /// <param name="repeatIntervalUnit">Time interval to use for the repeatInterval.</param>
+        /// <param name="repeatCount">How many times a trigger will be fired.</param>
+        /// <returns>String containing the scheduling description for the <see cref="ITrigger"/></returns>
         public static string GetScheduleDescription(int repeatInterval, IntervalUnit repeatIntervalUnit, int repeatCount = 0)
         {
             var result = "Repeat ";
@@ -136,16 +164,29 @@ namespace AB.QuartzAdmin.WebApi.Models.Triggers
             }
         }
 
+        /// <summary>
+        /// Extension method for converting a <see cref="TimeOfDay"/> object to a readable string.
+        /// </summary>
+        /// <param name="timeOfDay">The object to convert.</param>
+        /// <returns>A readable time of day string in short format.</returns>
         public static string ToShortFormat(this TimeOfDay timeOfDay)
         {
             return timeOfDay.ToTimeSpan().ToString("g", CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Extension method for converting a <see cref="TimeOfDay"/> object to <see cref="TimeSpan"/> object.
+        /// </summary>
+        /// <param name="timeOfDay">The object to convert from.</param>
+        /// <returns>The converted object.</returns>
         public static TimeSpan ToTimeSpan(this TimeOfDay timeOfDay)
         {
             return TimeSpan.FromSeconds(timeOfDay.Second + timeOfDay.Minute * 60 + timeOfDay.Hour * 3600);
         }
 
+        /// <summary>
+        /// Data model for describing days in a week.
+        /// </summary>
         public class DaysOfWeekViewModel
         {
             public bool Monday { get; set; }
@@ -156,6 +197,9 @@ namespace AB.QuartzAdmin.WebApi.Models.Triggers
             public bool Saturday { get; set; }
             public bool Sunday { get; set; }
 
+            /// <summary>
+            /// Setting all days to true.
+            /// </summary>
             public void AllOn()
             {
                 Monday = true;
@@ -167,29 +211,50 @@ namespace AB.QuartzAdmin.WebApi.Models.Triggers
                 Sunday = true;
             }
 
+            /// <summary>
+            /// Populating the data model.
+            /// </summary>
+            /// <param name="list">List of <see cref="DayOfWeek"/> to populate.</param>
+            /// <returns>The populated <see cref="DaysOfWeekViewModel"/></returns>
             public static DaysOfWeekViewModel Create(IEnumerable<DayOfWeek> list)
             {
                 var model = new DaysOfWeekViewModel();
                 foreach(var item in list)
                 {
-                    if(item == DayOfWeek.Sunday)
-                        model.Sunday = true;
-                    if(item == DayOfWeek.Monday)
-                        model.Monday = true;
-                    if(item == DayOfWeek.Tuesday)
-                        model.Tuesday = true;
-                    if(item == DayOfWeek.Wednesday)
-                        model.Wednesday = true;
-                    if(item == DayOfWeek.Thursday)
-                        model.Thursday = true;
-                    if(item == DayOfWeek.Friday)
-                        model.Friday = true;
-                    if(item == DayOfWeek.Saturday)
-                        model.Saturday = true;
+                    switch(item)
+                    {
+                        case DayOfWeek.Sunday:
+                            model.Sunday = true;
+                            break;
+                        case DayOfWeek.Monday:
+                            model.Monday = true;
+                            break;
+                        case DayOfWeek.Tuesday:
+                            model.Tuesday = true;
+                            break;
+                        case DayOfWeek.Wednesday:
+                            model.Wednesday = true;
+                            break;
+                        case DayOfWeek.Thursday:
+                            model.Thursday = true;
+                            break;
+                        case DayOfWeek.Friday:
+                            model.Friday = true;
+                            break;
+                        case DayOfWeek.Saturday:
+                            model.Saturday = true;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
                 return model;
             }
 
+            /// <summary>
+            /// Getting a list of selected days from the model.
+            /// </summary>
+            /// <returns>The list of selected days in the model.</returns>
             public IEnumerable<DayOfWeek> GetSelected()
             {
                 if(Monday) yield return DayOfWeek.Monday;
@@ -201,7 +266,13 @@ namespace AB.QuartzAdmin.WebApi.Models.Triggers
                 if(Sunday) yield return DayOfWeek.Sunday;
             }
 
+            /// <summary>
+            /// True if only Saturday and Sunday is true.
+            /// </summary>
             public bool AreOnlyWeekendEnabled => !Monday && !Tuesday && !Wednesday && !Thursday && !Friday && Saturday && Sunday;
+            /// <summary>
+            /// True if only weekdays are set to true.
+            /// </summary>
             public bool AreOnlyWeekdaysEnabled => Monday && Tuesday && Wednesday && Thursday && Friday && !Saturday && !Sunday;
         }
 
