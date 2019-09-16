@@ -13,9 +13,9 @@ The api can easily be plugged into a existing application.
 
 ## Endpoints
 - Scheduler
-![Image of actions](https://github.com/gwinnem/AB.QuartzAdmin.WebApi/blob/master/images/SchedulerApiEndpoints.png)
+![Image of scheduleractions](https://github.com/gwinnem/AB.QuartzAdmin.WebApi/blob/master/images/SchedulerApiEndpoints.png)
 - Jobs
-![Image of actions](https://github.com/gwinnem/AB.QuartzAdmin.WebApi/blob/master/images/JobsApiEndpoints.png)
+![Image of jobactions](https://github.com/gwinnem/AB.QuartzAdmin.WebApi/blob/master/images/JobsApiEndpoints.png)
 - Triggers - Coming
 - Calendars - Coming
 
