@@ -7,12 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AB.QuartzAdmin.WebApi", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{0288E360-3506-4DD0-A0DC-C9C03ECAFD5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreWeb", "src\Examples\AspNetCoreWeb\AspNetCoreWeb.csproj", "{A5640E6E-0481-4EC9-8B79-02A5C5823DF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWeb", "src\Examples\AspNetCoreWeb\AspNetCoreWeb.csproj", "{A5640E6E-0481-4EC9-8B79-02A5C5823DF4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56738EFA-90A7-4F71-A7F9-37CFE4FD211C}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{94B8C29B-9ABF-4551-9533-3299DD4692B9}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Users\gwinnem\Desktop\JobsApiEndpoints.png = ..\..\..\Users\gwinnem\Desktop\JobsApiEndpoints.png
+		..\..\..\Users\gwinnem\Desktop\SchedulerApiEndpoints.png = ..\..\..\Users\gwinnem\Desktop\SchedulerApiEndpoints.png
 	EndProjectSection
 EndProject
 Global
@@ -35,6 +41,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A5640E6E-0481-4EC9-8B79-02A5C5823DF4} = {0288E360-3506-4DD0-A0DC-C9C03ECAFD5D}
+		{94B8C29B-9ABF-4551-9533-3299DD4692B9} = {56738EFA-90A7-4F71-A7F9-37CFE4FD211C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA3C6C7C-9128-44F8-B0A3-44AD2E55880B}
