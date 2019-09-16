@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Models\Calendars\" />
-    <Folder Include="Models\Triggers\" />
   </ItemGroup>
 
 </Project>

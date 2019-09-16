@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace AB.QuartzAdmin.WebApi.Controllers
 {
     /// <summary>
-    /// Api endpoint for a job actions.
+    /// Api endpoint for job actions and details.
     /// </summary>
     [Produces("application/json")]
     [Route("api/job")]
