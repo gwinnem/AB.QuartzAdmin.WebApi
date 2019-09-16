@@ -30,19 +30,19 @@ namespace AB.QuartzAdmin.WebApi.Models.Triggers
         /// <summary>
         /// The time when the trigger fired first time.
         /// </summary>
-        public string StartTime { get; set; }
+        public string StartTimeUtc { get; set; }
         /// <summary>
         /// The time when a trigger will stop triggering,
         /// </summary>
-        public string EndTime { get; set; }
+        public string EndTimeUtc { get; set; }
         /// <summary>
         /// The last time the trigger was fired.
         /// </summary>
-        public string LastFireTime { get; set; }
+        public string LastFireTimeUtc { get; set; }
         /// <summary>
         /// The next time the trigger fires.
         /// </summary>
-        public string NextFireTime { get; set; }
+        public string NextFireTimeUtc { get; set; }
         /// <summary>
         /// Human readable description of the <see cref="ITrigger"/> scheduling settings.
         /// </summary>

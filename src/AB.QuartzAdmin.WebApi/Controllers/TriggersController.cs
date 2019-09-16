@@ -59,10 +59,10 @@ namespace AB.QuartzAdmin.WebApi.Controllers
                         TriggerGroup = t.Key.Group,
                         IsPaused = state == TriggerState.Paused,
                         ScheduleDescription = t.GetScheduleDescription(),
-                        StartTime = t.StartTimeUtc.UtcDateTime.ToString(CultureInfo.InvariantCulture),
-                        EndTime = t.FinalFireTimeUtc?.UtcDateTime.ToString(CultureInfo.InvariantCulture),
-                        LastFireTime = t.GetPreviousFireTimeUtc()?.UtcDateTime.ToString(CultureInfo.InvariantCulture),
-                        NextFireTime = t.GetNextFireTimeUtc()?.UtcDateTime.ToString(CultureInfo.InvariantCulture),
+                        StartTimeUtc = t.StartTimeUtc.UtcDateTime.ToString(CultureInfo.InvariantCulture),
+                        EndTimeUtc = t.FinalFireTimeUtc?.UtcDateTime.ToString(CultureInfo.InvariantCulture),
+                        LastFireTimeUtc = t.GetPreviousFireTimeUtc()?.UtcDateTime.ToString(CultureInfo.InvariantCulture),
+                        NextFireTimeUtc = t.GetNextFireTimeUtc()?.UtcDateTime.ToString(CultureInfo.InvariantCulture),
                         Description = t.Description,
                     });
                 }
